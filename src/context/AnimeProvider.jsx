@@ -5,13 +5,22 @@ const AnimeContext = createContext()
 const AnimeProvider = ({children}) => {
 
     const [animeList, setAnimeList] = useState([])
-    const [images, setImages] = useState([])
+    const [detailsAnime, setDetailsAnime] = useState([])
 
     const handleSubmit = async()=> {
         try {
             const {data} = await axios('https://api.jikan.moe/v4/anime')
-            setImages(data.data)
             setAnimeList(data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const getDetails = async id => {
+        try {
+            const {data} = await axios(`https://api.jikan.moe/v4/anime/${id}`)
+            console.log(data)
+            setDetailsAnime(data.data)
         } catch (error) {
             console.log(error)
         }
@@ -23,7 +32,7 @@ const AnimeProvider = ({children}) => {
 
 
     return(
-        <AnimeContext.Provider value={{animeList,images}}>
+        <AnimeContext.Provider value={{animeList, getDetails, detailsAnime}}>
             {children}
         </AnimeContext.Provider>
     )
