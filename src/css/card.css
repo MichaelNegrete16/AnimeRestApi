@@ -48,10 +48,8 @@
     margin-bottom: 5px;
 }
 .btn button{
-    padding: 10px 20px;
-    border: none;
-    color: black;
-    background-color: rgb(127, 197, 255);
+
     cursor: pointer;
-    border-radius: 5px;
+    border: none;
+    
 }

@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import useAnime from '../hooks/useAnime'
 import '../css/card.css'
+import Modal from './Modal'
 
 const CardItems = () => {
-    const {animeList,getDetails} = useAnime()
-    console.log(animeList)
+    const {animeList} = useAnime()
+    // console.log(animeList)
     return (
         
             <>
@@ -18,10 +20,11 @@ const CardItems = () => {
                             <p>Status: <span>{imagen.status}</span></p>
                         </div>
                         <div className='btn'>
-                            <button onClick={()=> getDetails(imagen.mal_id)} >Ver Mas</button>
+                            <Modal id={imagen.mal_id} />
                         </div>
                     </div>
                 ))}
+                
             </>
         
     )

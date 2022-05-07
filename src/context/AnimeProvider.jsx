@@ -19,11 +19,12 @@ const AnimeProvider = ({children}) => {
     const getDetails = async id => {
         try {
             const {data} = await axios(`https://api.jikan.moe/v4/anime/${id}`)
-            console.log(data)
+            // console.log(data)
             setDetailsAnime(data.data)
         } catch (error) {
             console.log(error)
         }
+        
     }
 
     useEffect(()=> {
