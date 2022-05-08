@@ -81,6 +81,19 @@
     color: white;
 }
 
+.display-imagen{
+    position: relative;
+}
+.buton-play{
+    position: absolute;
+    top: 0;
+    left: 70px;
+}
+
+.buton-play img{
+    width: 100px;
+}
+
 @media(max-width: 520px){
     .paragraph .synopsis-p p{
         margin-left: 1px;

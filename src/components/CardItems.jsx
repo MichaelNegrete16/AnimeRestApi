@@ -6,7 +6,7 @@ import Modal from './Modal'
 
 const CardItems = () => {
     const {animeList} = useAnime()
-    // console.log(animeList)
+    console.log(animeList)
     return (
         
             <>

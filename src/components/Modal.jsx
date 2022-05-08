@@ -3,17 +3,22 @@ import useAnime from '../hooks/useAnime'
 import '../css/modal.css'
 import { useState, useEffect } from 'react'
 
+import PlayIcon from '../img/playicon.svg'
+
 const Modal = ({id}) => {
 
     const {detailsAnime,getDetails} = useAnime()
-    const {title,synopsis,images,genres,episodes,airing} = detailsAnime
+    const {title,synopsis,images,genres,episodes,airing,demographics,trailer} = detailsAnime
     const [generos,setGeneros] = useState([])
+    const [generosAdultos,setGenerosAdultos] = useState([])
     
     useEffect(()=>{
         setGeneros(genres)
-    },[genres])
+        setGenerosAdultos(demographics)
+    },[genres,demographics])
     
     console.log(detailsAnime)
+
     return (
         <div className='container-modal'>
             {/* <!-- Trigger the modal with a button --> */}
@@ -34,8 +39,13 @@ const Modal = ({id}) => {
                 <div className="modal-body">
 
                     <div className='content-body'>
-                        <div>
+                        <div className='display-imagen'>
                             <img src={images?.jpg.image_url} alt="ImagenContianer" />
+                            <div className='buton-play'>
+                                <a href={trailer?.url} target='_blank' rel='noreferrer'>
+                                    <img src={PlayIcon} alt="BotonDePlay" />
+                                </a>
+                            </div>
                         </div>
 
                         <div className='paragraph'> 
@@ -55,6 +65,11 @@ const Modal = ({id}) => {
                     
                     <div className='content-generos'>
                             {generos?.map(genero=> (
+                                <div className='content-generos-name'>
+                                    <a key={genero.mal_id} href={genero.url}> {genero.name} </a>
+                                </div>
+                            ))}
+                            {generosAdultos?.map(genero=> (
                                 <div className='content-generos-name'>
                                     <a key={genero.mal_id} href={genero.url}> {genero.name} </a>
                                 </div>
