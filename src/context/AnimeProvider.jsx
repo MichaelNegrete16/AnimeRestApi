@@ -6,6 +6,7 @@ const AnimeProvider = ({children}) => {
 
     const [animeList, setAnimeList] = useState([])
     const [detailsAnime, setDetailsAnime] = useState([])
+    const [cargando, setCargando] = useState(false)
 
     const handleSubmit = async()=> {
         try {
@@ -14,13 +15,16 @@ const AnimeProvider = ({children}) => {
         } catch (error) {
             console.log(error)
         }
+        
     }
 
     const getDetails = async id => {
+        setCargando(true)
         try {
             const {data} = await axios(`https://api.jikan.moe/v4/anime/${id}`)
             // console.log(data)
             setDetailsAnime(data.data)
+            setCargando(false)
         } catch (error) {
             console.log(error)
         }
@@ -33,7 +37,7 @@ const AnimeProvider = ({children}) => {
 
 
     return(
-        <AnimeContext.Provider value={{animeList, getDetails, detailsAnime}}>
+        <AnimeContext.Provider value={{animeList, getDetails, detailsAnime,cargando}}>
             {children}
         </AnimeContext.Provider>
     )

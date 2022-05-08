@@ -1,18 +1,97 @@
 .container-modal .modal-body {
     font-family: Arial;
     font-weight: bold;
-    padding: 0;
 }
 .modal-dialog{
     width: 100rem;
 }
-.modal-body{
+@media(max-width: 500px){
+    .modal-dialog{
+        width: 48rem;
+    }
+    .modal-header{
+        position: relative;
+    }
+    .content-body img{
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        top: -110px;
+        left: 1px;
+    }
+}
+
+
+.content-body{
    display: grid;
    grid-template-columns: 1fr 1fr;
 }
-.paragraph{
+.paragraph .synopsis-p{
     margin-left: 10px;
     margin-right: 10px;
-    white-space: normal;
+    white-space: pre-line;
     width: 700px;
+}
+.details-content{
+    display: flex;
+}
+
+.episodes-p{
+    margin-top: 38px;
+    margin-left: 2px;
+    width: 200px;
+    border: 2px solid #5bc0de;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.in-airing-true{
+    margin-top: 38px;
+    margin-left: 2px;
+    width: 200px;
+    border: 2px solid #7ade5b;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.in-airing-false{
+    margin-top: 38px;
+    margin-left: 2px;
+    width: 200px;
+    border: 2px solid #ca4747;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.content-generos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 20px ;
+    
+}
+.content-generos-name{
+    margin:10px 20px;
+}
+
+.content-generos-name a{
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5bc0de;
+    color: white;
+}
+
+@media(max-width: 520px){
+    .paragraph .synopsis-p p{
+        margin-left: 1px;
+        margin-right: 90px;
+        white-space: pre-line;
+        width: 450px;
+    }
+    .content-generos{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
 }

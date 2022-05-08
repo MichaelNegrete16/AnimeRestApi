@@ -6,6 +6,7 @@
 }
 
 .container{
+    width: 134rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,11 +15,28 @@
 }
 
 .logo-container img{
+    flex: 1;
     height: 60px;
     border-radius: 60px;
     object-fit: cover;
     margin-left: 40px;
     width: 100%;
+}
+
+@media(max-width: 530px){
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+    }
+    .logo-container img{
+        height: 60px;
+        border-radius: 60px;
+        object-fit: cover;
+        margin-left: 0;
+        width: 100%;
+    }
 }
 
 
@@ -34,6 +52,7 @@
 }
 
 .ul-container ul li{
+    flex: 1;
     display: inline-block;
     align-items: center;
     list-style: none;
