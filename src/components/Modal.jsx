@@ -4,10 +4,11 @@ import '../css/modal.css'
 import { useState, useEffect } from 'react'
 
 import PlayIcon from '../img/playicon.svg'
+import Spinner from './Spinner'
 
 const Modal = ({id}) => {
 
-    const {detailsAnime,getDetails} = useAnime()
+    const {detailsAnime,getDetails,cargandoModal} = useAnime()
     const {title,synopsis,images,genres,episodes,airing,demographics,trailer} = detailsAnime
     const [generos,setGeneros] = useState([])
     const [generosAdultos,setGenerosAdultos] = useState([])
@@ -17,7 +18,7 @@ const Modal = ({id}) => {
         setGenerosAdultos(demographics)
     },[genres,demographics])
     
-    console.log(detailsAnime)
+    // console.log(detailsAnime)
 
     return (
         <div className='container-modal'>
@@ -32,48 +33,60 @@ const Modal = ({id}) => {
                 <div className="modal-content">
                 <div className="modal-header">
                     <button type="button" className="close" data-dismiss="modal">&times;</button>
-                    <h2 className="modal-title">{title}</h2>
-                    <h4>Synopsis</h4>
+                    {cargandoModal ? <Spinner/>
+                    : <>
+                        <h2 className="modal-title">{title}</h2>
+                        <h4>Synopsis</h4>
+                    </>}
                 </div>
 
                 <div className="modal-body">
 
                     <div className='content-body'>
                         <div className='display-imagen'>
-                            <img src={images?.jpg.image_url} alt="ImagenContianer" />
-                            <div className='buton-play'>
-                                <a href={trailer?.url} target='_blank' rel='noreferrer'>
-                                    <img src={PlayIcon} alt="BotonDePlay" />
-                                </a>
-                            </div>
+                            {cargandoModal ? <Spinner/>
+                            : <>
+                                <img src={images?.jpg.image_url} alt="ImagenContianer" />
+                                <div className='buton-play'>
+                                    <a href={trailer?.url} target='_blank' rel='noreferrer'>
+                                        <img src={PlayIcon} alt="BotonDePlay" />
+                                    </a>
+                                </div>
+                            </>}
                         </div>
 
                         <div className='paragraph'> 
-                            <p className='synopsis-p'>{synopsis}</p> 
-                            <div>
-                                {airing 
-                                        ? <p className='in-airing-true'>En aire</p> 
-                                        :(
-                                            <div className='details-content'>
-                                                <p className='episodes-p'>Episodios: {episodes}</p>
-                                                <p className='in-airing-false'>Finalizado</p> 
-                                            </div>
-                                        )}
-                            </div>
+                            {cargandoModal ? <Spinner/>
+                            : <>
+                                <p className='synopsis-p'>{synopsis}</p> 
+                                <div>
+                                    {airing 
+                                            ? <p className='in-airing-true'>En aire</p> 
+                                            :(
+                                                <div className='details-content'>
+                                                    <p className='episodes-p'>Episodios: {episodes}</p>
+                                                    <p className='in-airing-false'>Finalizado</p> 
+                                                </div>
+                                            )}
+                                </div>
+                            </>}
                         </div>
                     </div>
                     
                     <div className='content-generos'>
-                            {generos?.map(genero=> (
+                            {cargandoModal ? <Spinner/>
+                            : <>
+                                {generos?.map(genero=> (
                                 <div className='content-generos-name'>
                                     <a key={genero.mal_id} href={genero.url}> {genero.name} </a>
                                 </div>
-                            ))}
-                            {generosAdultos?.map(genero=> (
-                                <div className='content-generos-name'>
-                                    <a key={genero.mal_id} href={genero.url}> {genero.name} </a>
-                                </div>
-                            ))}
+                                ))}
+                                {generosAdultos?.map(genero=> (
+                                    <div className='content-generos-name'>
+                                        <a key={genero.mal_id} href={genero.url}> {genero.name} </a>
+                                    </div>
+                                ))}
+                            </>}
                     </div>
 
                 </div>

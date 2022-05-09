@@ -7,21 +7,53 @@ const AnimeProvider = ({children}) => {
     const [animeList, setAnimeList] = useState([])
     const [detailsAnime, setDetailsAnime] = useState([])
     const [cargando, setCargando] = useState(false)
+    const [cargandoModal, setCargandoModal] = useState(false)
     const [pageCount,setPageCount] = useState(0)
+    const [buscar,setBuscar] = useState('')
 
+
+    useEffect(()=> {
+
+        const handleSubmit = async()=> {
+            setCargando(true)
+            try {
+                const {data} = await axios('https://api.jikan.moe/v4/anime?page=1')
+                setPageCount(data.pagination.last_visible_page)
+                setAnimeList(data.data)
+                setCargando(false)
+            } catch (error) {
+                console.log(error)
+            } 
+        }
+
+        handleSubmit()
+        
+    },[])
+
+    const handleSearch = async name => {
+        
+        try {
+            const {data} = await axios(`https://api.jikan.moe/v4/anime?q=${name}`)
+            setAnimeList(data.data)
+            
+        } catch (error) {
+            console.log(error)
+        }
+        // console.log(name)
+    }
 
 
     const getDetails = async id => {
-        setCargando(true)
+        setCargandoModal(true)
         try {
             const {data} = await axios(`https://api.jikan.moe/v4/anime/${id}`)
             // console.log(data)
             setDetailsAnime(data.data)
-            setCargando(false)
+            setCargandoModal(false)
+            
         } catch (error) {
             console.log(error)
         }
-        
     }
 
     const handlePageClick = async (data) => {
@@ -32,36 +64,32 @@ const AnimeProvider = ({children}) => {
     }
 
     const handleClickPage = async currentPage => {
-
+        setCargando(true)
         try {
-            
             const {data} = await axios(`https://api.jikan.moe/v4/anime?page=${currentPage}`) 
+            setCargando(false)
             return data.data
-
         } catch (error) {
             console.log(error)
         }
 
     }
 
-    useEffect(()=> {
-        const handleSubmit = async()=> {
-            try {
-                const {data} = await axios('https://api.jikan.moe/v4/anime?page=1')
-                setPageCount(data.pagination.last_visible_page)
-                setAnimeList(data.data)
-            } catch (error) {
-                console.log(error)
-            } 
-        }
 
-        handleSubmit()
 
-    },[])
 
 
     return(
-        <AnimeContext.Provider value={{animeList, getDetails, detailsAnime,cargando,handlePageClick,pageCount}}>
+        <AnimeContext.Provider value={{animeList, 
+                                        getDetails, 
+                                        detailsAnime,
+                                        cargando,
+                                        handlePageClick,
+                                        pageCount,
+                                        cargandoModal,
+                                        buscar,
+                                        setBuscar,
+                                        handleSearch}}>
             {children}
         </AnimeContext.Provider>
     )

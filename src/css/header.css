@@ -39,6 +39,9 @@
     }
 }
 
+.input-container{
+    position: relative;
+}
 
 .input-container input{
     display: flex;
@@ -46,27 +49,16 @@
     border: 1px solid gray;
     padding: 10px 20px;
     border-radius: 5px;
+    width: 500px;
 }
 .input-container input::placeholder{
     justify-content:flex-start;
 }
 
-.ul-container ul li{
-    flex: 1;
-    display: inline-block;
-    align-items: center;
-    list-style: none;
-    color: black;
-    margin: 0px 20px;
-    border: 1px solid black;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.15s;
+.icono-search{
+    position: absolute;
+    height: 20px;
+    right: 10px;
+    top: 10px;
 }
 
-.ul-container ul li:hover{
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    background-color: rgb(127, 197, 255);
-    color: white;
-}
