@@ -4,6 +4,7 @@ import useAnime from '../hooks/useAnime'
 import '../css/card.css'
 import Modal from './Modal'
 
+
 const CardItems = () => {
     const {animeList} = useAnime()
     console.log(animeList)
@@ -24,7 +25,6 @@ const CardItems = () => {
                         </div>
                     </div>
                 ))}
-                
             </>
         
     )
